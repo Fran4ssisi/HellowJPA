@@ -15,34 +15,51 @@ public class JpaMain {
         tx.begin();
 
         try {
-            //INSERT
+
+            //엔티티를 생성한 상태(비영속)
 //            Member member = new Member();
-//            member.setId(2L);
-//            member.setName("HelloB");
+//            member.setId(101L);
+//            member.setName("HelloJPA");
+
+//            System.out.println("=== BEFORE ===");
+            //엔티티를 영속
+            //1차 캐시에 저장됨
 //            em.persist(member);
+//            System.out.println("=== AFTER ===");
 
-            //SELECT
-//            Member findMember = em.find(Member.class, 1L);
-//            System.out.println("findMember.id =" + findMember.getId());
-//            System.out.println("findMember.name =" + findMember.getName());
+            //1차 캐시에서 조회
+//            Member findMember = em.find(Member.class, 101L);
+//            System.out.println("findMember.id = " + findMember.getId());
+//            System.out.println("findMember.name = " + findMember.getName());
 
-            //DELETE
-//            Member findMember = em.find(Member.class, 1L);
-//            em.remove(findMember);
+            //영속성에서 제외시킨다(준영속)
+//            em.detach(member);
+            //영속삭제
+//            em.remove(member);
 
-            //UPDATE
-//            Member findMember = em.find(Member.class, 1L);
-//            findMember.setName("HelloJPA");
 
-            //JPQL
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(5)
-                    .setMaxResults(8)
-                    .getResultList();
+            //1차캐시
+//            Member findMember1 = em.find(Member.class, 101L);
+//            Member findMember2 = em.find(Member.class, 101L); //1차캐시에서 가져온다
+//
+//            System.out.println("result = " + (findMember1 == findMember2));
 
-            for (Member member : result){
-                System.out.println("member.name = " + member.getName());
-            }
+
+
+            //persist의 흐름 이해
+//            Member member1 = new Member(150L, "A");
+//            Member member2 = new Member(160L, "B");
+//
+//            em.persist(member1);
+//            em.persist(member2);
+//            System.out.println("=============================");
+
+
+            Member member = em.find(Member.class, 150L);
+            member.setName("ZZZZZ");
+//            em.persist(member); //할 필요없다 자바 컬렉션과 같다
+
+            System.out.println("=============================");
 
             tx.commit();
         } catch (Exception e) {
