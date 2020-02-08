@@ -55,9 +55,15 @@ public class JpaMain {
 //            System.out.println("=============================");
 
 
-            Member member = em.find(Member.class, 150L);
-            member.setName("ZZZZZ");
+//            Member member = em.find(Member.class, 150L);
+//            member.setName("ZZZZZ");
 //            em.persist(member); //할 필요없다 자바 컬렉션과 같다
+
+
+            //flush insert문이 호출된다.
+            Member member = new Member(200L, "member200");
+            em.persist(member);
+            em.flush();
 
             System.out.println("=============================");
 
