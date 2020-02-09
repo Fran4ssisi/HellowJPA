@@ -15,34 +15,6 @@ public class JpaMain {
         tx.begin();
 
         try {
-            //INSERT
-//            Member member = new Member();
-//            member.setId(2L);
-//            member.setName("HelloB");
-//            em.persist(member);
-
-            //SELECT
-//            Member findMember = em.find(Member.class, 1L);
-//            System.out.println("findMember.id =" + findMember.getId());
-//            System.out.println("findMember.name =" + findMember.getName());
-
-            //DELETE
-//            Member findMember = em.find(Member.class, 1L);
-//            em.remove(findMember);
-
-            //UPDATE
-//            Member findMember = em.find(Member.class, 1L);
-//            findMember.setName("HelloJPA");
-
-            //JPQL
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(5)
-                    .setMaxResults(8)
-                    .getResultList();
-
-            for (Member member : result){
-                System.out.println("member.name = " + member.getName());
-            }
 
             tx.commit();
         } catch (Exception e) {

@@ -1,30 +1,39 @@
 package hellojpa;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
+@Table(name = "MBR")
 public class Member {
 
     @Id
     private Long id;
 
+    //컬럼 매핑
+    @Column
     private String name;
 
-    public Long getId() {
-        return id;
-    }
+    private Integer age;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    //enum 타입 매핑 타입지정은 필수다.
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
 
-    public String getName() {
-        return name;
-    }
+    //날짜 타입 매핑
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
 
-    public void setName(String name) {
-        this.name = name;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifiedDate;
+
+    //특정 필드를 컬럼에서 제외
+    @Transient
+    private int temp;
+    //BLOB, CLOB 매핑
+    @Lob
+    private String description;
+
+    public Member() {
     }
 }
