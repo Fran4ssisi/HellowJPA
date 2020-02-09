@@ -4,35 +4,26 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "MBR")
+//@SequenceGenerator(name = "member_seq_generator",
+//        sequenceName = "member_seq")
+@TableGenerator(
+        name = "MEMBER_SQE_GENETOR",
+        table = "MY_SEQUENCES",
+        pkColumnName = "MEMBER_SEQ",
+        allocationSize = 1
+)
 public class Member {
 
     @Id
+    //@GeneratedValue 자동 증가시켜준다
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+//            generator = "member_seq_generator")
+    @GeneratedValue(strategy = GenerationType.TABLE,
+            generator = "MEMBER_SQE_GENETOR")
     private Long id;
 
-    //컬럼 매핑
     @Column
     private String name;
-
-    private Integer age;
-
-    //enum 타입 매핑 타입지정은 필수다.
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
-
-    //날짜 타입 매핑
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-
-    //특정 필드를 컬럼에서 제외
-    @Transient
-    private int temp;
-    //BLOB, CLOB 매핑
-    @Lob
-    private String description;
 
     public Member() {
     }
